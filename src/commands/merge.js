@@ -5,19 +5,19 @@ const SEPARATE = '-separate'
 
 const logger = loggers.get('merge')
 
-const merge = (fileName, cmd) => {
+const merge = (name, cmd) => {
   try {
     let underHood
-    if (!fileName) throw 'You must specify the input file name'
+    if (!name) throw 'You must specify the input file name'
     if (!shell.which(GDAL_MERGE))
       throw 'You need to have GDAL installed and added to PATH'
     const filesToBeMerged = []
-    shell.ls(`*${fileName}*`).forEach(file => {
+    shell.ls(`*${name}*`).forEach(file => {
       filesToBeMerged.push(file)
     })
     if (!cmd.output)
       logger.warn('Input file name will be used as default output file name')
-    const outputFileName = cmd.output || fileName
+    const outputFileName = cmd.output || name
     if (cmd.separate) {
       underHood = `${GDAL_MERGE} ${SEPARATE} -o ${outputFileName}.tiff -of GTiff ${filesToBeMerged.join(
         ' ',

@@ -26,5 +26,6 @@ const labeller = lbl => {
 
 const loggers = new winston.Container()
 loggers.add('merge', labeller('merge'))
+loggers.add('crop', labeller('crop'))
 
 module.exports = loggers

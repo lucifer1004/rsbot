@@ -78,7 +78,17 @@ const validate = (name, left, right, top, bottom) => {
             execute(file, left, right, top, bottom)
             break
           default:
-            logger.error(stderr.split(': ').splice(1))
+            stderr
+              .split(': ')
+              .splice(1)
+              .join('\n')
+              .split('\n')
+              .reverse()
+              .splice(1)
+              .reverse()
+              .forEach(line => {
+                logger.error(line)
+              })
         }
       },
     )

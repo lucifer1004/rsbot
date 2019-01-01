@@ -8,7 +8,9 @@ rsbot.version(version, '-v, --version')
 rsbot
   .command('merge [name]')
   .alias('m')
-  .description('Merge multi images')
+  .description(
+    'Merge multi images in current directory that share part of their names',
+  )
   .option('-s, --separate', 'Merge bands instead of coverage')
   .option(
     '-o, --output [output]',

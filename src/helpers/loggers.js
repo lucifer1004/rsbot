@@ -11,13 +11,22 @@ const myFormat = printf(info => {
   )
 })
 
+const transports = {
+  console: new winston.transports.Console({level: 'info'}),
+  debug: new winston.transports.File({
+    filename: 'rsbot.debug.log',
+    level: 'debug',
+  }),
+  info: new winston.transports.File({
+    filename: 'rsbot.info.log',
+    level: 'info',
+  }),
+}
+
 const labeller = lbl => {
   return {
     format: combine(label({label: lbl}), timestamp(), myFormat),
-    transports: [
-      new winston.transports.Console(),
-      new winston.transports.File({filename: 'rsbot.log'}),
-    ],
+    transports: [transports.console, transports.debug, transports.info],
     exceptionHandlers: [
       new winston.transports.File({filename: 'rsbot-exceptions.log'}),
     ],
